@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/xmlslayer/FileContentIndex
+/.vs/xmlslayer/v17
+/APReporting_SED5_20231222113508.modified.xml

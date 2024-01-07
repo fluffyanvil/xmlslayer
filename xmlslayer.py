@@ -1,0 +1,39 @@
+
+import xml.etree.ElementTree as ET
+import argparse
+import os
+
+parser = argparse.ArgumentParser(description="Remove ordernumber from invoice",
+                                 formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument("-f", "--file", help="input .xml file, example, -f C:\python\APReporting_SED5_20231222113508.xml", required=True)
+parser.add_argument("-o", "--ordernumber", help="list of ordernumbers to remove, example -o 000000110450 000000110451", required=True, default=[], nargs='+')
+args = parser.parse_args()
+config = vars(args)
+path = args.file
+ordernumbers = args.ordernumber
+
+file = os.path.splitext(os.path.basename(path))[0]
+folder = os.path.dirname(path)
+
+filename = os.path.join(folder, f'{file}.modified.xml')
+
+tree = ET.parse(path)
+
+root = tree.getroot()
+dataarea = root.findall("dataarea")
+
+invoices = dataarea[0].findall("invoice")
+
+newInvoices = []
+for i in invoices:
+     ordernumber = i.find("ordernumber")
+     if (ordernumber is not None and ordernumber.text in ordernumbers):
+        i.remove(ordernumber)
+        newInvoices.append(i)
+
+dataarea[0].clear()
+
+for i in newInvoices:
+    dataarea[0].append(i)
+with open(filename, 'wb') as f:
+    tree.write(f, encoding='utf-8')
