@@ -12,7 +12,7 @@
     <Name>xmlslayer</Name>
     <RootNamespace>xmlslayer</RootNamespace>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
-    <CommandLineArguments>-f "E:\git\projects\xmlslayer\APReporting_SED5_20231222113508.xml" -o 000000110450 000000110451</CommandLineArguments>
+    <CommandLineArguments>-f "E:\git\projects\xmlslayer\APReporting_SED5_20231222113508.xml" "E:\git\projects\xmlslayer\APReporting_SED5_20231222103110.xml" "E:\git\projects\xmlslayer\APReporting_SED5_20231222114708.xml" -o 000000110450 000000110451</CommandLineArguments>
     <InterpreterPath>C:\Users\serge\AppData\Local\Programs\Python\Python311\python.exe</InterpreterPath>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
@@ -28,7 +28,9 @@
     <Compile Include="xmlslayer.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="APReporting_SED5_20231222103110.xml" />
     <Content Include="APReporting_SED5_20231222113508.xml" />
+    <Content Include="APReporting_SED5_20231222114708.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
