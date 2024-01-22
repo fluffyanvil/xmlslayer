@@ -17,6 +17,7 @@ for path in paths:
     folder = os.path.dirname(path)
 
     filename = os.path.join(folder, f'{file}.modified.xml')
+    filteredFilename = os.path.join(folder, f'{file}.filtered_out.xml')
 
     tree = ET.parse(path)
 
@@ -26,11 +27,14 @@ for path in paths:
     invoices = dataarea[0].findall("invoice")
 
     newInvoices = []
+    filteredInvoices = []
     for i in invoices:
          ordernumber = i.find("ordernumber")
          if (ordernumber is not None and ordernumber.text in ordernumbers):
             i.remove(ordernumber)
             newInvoices.append(i)
+         else:
+            filteredInvoices.append(i)
 
     dataarea[0].clear()
 
@@ -38,4 +42,12 @@ for path in paths:
         dataarea[0].append(i)
     with open(filename, 'wb') as f:
         tree.write(f, encoding='utf-8')
+    
+    dataarea[0].clear()
+    
+    for i in filteredInvoices:
+        dataarea[0].append(i)
+    with open(filteredFilename, 'wb') as f:
+        tree.write(f, encoding='utf-8')
+
 
